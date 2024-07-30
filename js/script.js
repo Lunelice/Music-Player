@@ -74,6 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
         timePassed.textContent = formatTime(currentTime);
     }
 
+
+     function setProgress(e) {
+       
+        const width = progressBar.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        
+        
+        audio.currentTime = (clickX / width) * duration;
+    }
+
+    
     function setProgress(e) {
         const width = this.clientWidth;
         const clickX = e.offsetX;
@@ -104,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('timeupdate', updateProgress);
     audio.addEventListener('ended', nextTrack);
     progressBar.addEventListener('click', setProgress);
+    
 
     // Initialize
     loadTrack(currentTrack);
