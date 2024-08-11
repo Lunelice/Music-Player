@@ -119,3 +119,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     loadTrack(currentTrack);
 });
+ 
