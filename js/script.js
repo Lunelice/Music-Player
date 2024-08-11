@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const song = document.querySelector(".song")
     const artist = document.querySelector(".artist")
     const cover = document.querySelector(".cover")
+    const soundBar = document.querySelector('.sound-bar')
+    const soundFill = document.querySelector('.sound-fill')
+    
     
 
     const playlist = [
@@ -93,9 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
+    audio.volume = 0.5;
 
+    function adjustVolume(e) {
+        const barWidth = soundBar.clientWidth;
+        const clickX = e.offsetX;
+        const volume = clickX / barWidth;
+        audio.volume = volume;  
+        soundFill.style.width = `${volume * 100}%`;
+    }
 
-    
 
     // Event Listeners
     btnPlay.addEventListener('click', playPause);
@@ -104,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('timeupdate', updateProgress);
     audio.addEventListener('ended', nextTrack);
     progressBar.addEventListener('click', setProgress);
+    soundBar.addEventListener('click', adjustVolume);
 
     // Initialize
     loadTrack(currentTrack);
